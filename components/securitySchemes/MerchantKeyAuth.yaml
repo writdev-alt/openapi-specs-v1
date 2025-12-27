@@ -1,0 +1,4 @@
+type: apiKey
+in: header
+name: X-MERCHANT-KEY
+description: Merchant secret key for authentication

@@ -1,0 +1,84 @@
+post:
+  summary: 'Processes a new withdrawal request.'
+  operationId: processesANewWithdrawalRequest
+  description: "Handles the creation of a new withdrawal transaction by performing:\n1. Basic validation (handled by WithdrawRequest).\n2. Complex business rules validation (ownership, limits, currency, custom IDR rules).\n3. Transaction creation and logging."
+  parameters: []
+  responses:
+    '201':
+      description: 'Withdrawal created successfully'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: true
+              code:
+                type: string
+                example: '2010301'
+              message:
+                type: string
+                example: 'Withdrawal has been created.'
+              data:
+                type: object
+                properties:
+                  trx_id:
+                    type: string
+                    example: 'TXN123456'
+                  amount:
+                    type: number
+                    example: 1000
+                  account_id:
+                    type: integer
+                    example: 1
+                  wallet_id:
+                    type: string
+                    example: 'wallet-uuid'
+    '403':
+      $ref: '../components/responses/Forbidden.yaml'
+    '422':
+      $ref: '../components/responses/ValidationError.yaml'
+  tags:
+    - Withdrawals
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            trx_ref:
+              type: string
+              description: ''
+              example: architecto
+              nullable: true
+            trx_reference:
+              type: string
+              description: ''
+              example: architecto
+              nullable: true
+            ref_trx:
+              type: string
+              description: ''
+              example: architecto
+              nullable: true
+            account_id:
+              type: integer
+              description: ''
+              example: 16
+            wallet_id:
+              type: string
+              description: ''
+              example: architecto
+            amount:
+              type: number
+              description: ''
+              example: 4326.41688
+          required:
+            - account_id
+            - wallet_id
+            - amount
+  security:
+    - ApiKeyAuth: []
+      MerchantKeyAuth: []

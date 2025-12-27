@@ -1,0 +1,15 @@
+get:
+  summary: 'Get user wallets'
+  operationId: getUserWallets
+  description: 'Retrieves all wallets belonging to the authenticated user with positive balance.'
+  parameters: []
+  responses:
+    '401':
+      $ref: '../components/responses/Unauthorized.yaml'
+    '403':
+      $ref: '../components/responses/Forbidden.yaml'
+  tags:
+    - Wallets
+  security:
+    - ApiKeyAuth: []
+      MerchantKeyAuth: []

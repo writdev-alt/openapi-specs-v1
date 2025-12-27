@@ -1,0 +1,24 @@
+get:
+  summary: 'Check the status of a transaction.'
+  operationId: checkTheStatusOfATransaction
+  description: ''
+  parameters: []
+  responses:
+    '401':
+      $ref: '../components/responses/Unauthorized.yaml'
+    '403':
+      $ref: '../components/responses/Forbidden.yaml'
+  tags:
+    - Transactions
+  security:
+    - ApiKeyAuth: []
+      MerchantKeyAuth: []
+parameters:
+  -
+    in: path
+    name: trxId
+    description: ''
+    example: architecto
+    required: true
+    schema:
+      type: string

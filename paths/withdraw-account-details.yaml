@@ -1,0 +1,226 @@
+get:
+  summary: 'Show withdraw account details.'
+  operationId: showWithdrawAccountDetails
+  description: 'Retrieve a single withdraw account owned by the authenticated user.'
+  parameters: []
+  responses:
+    '200':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              data:
+                id: 15
+                name: 'Bank BCA'
+                account_number: '1234567890'
+                withdraw_method:
+                  id: 3
+                  name: 'Bank Transfer'
+                  currency: IDR
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 15
+                  name:
+                    type: string
+                    example: 'Bank BCA'
+                  account_number:
+                    type: string
+                    example: '1234567890'
+                  withdraw_method:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      name:
+                        type: string
+                        example: 'Bank Transfer'
+                      currency:
+                        type: string
+                        example: IDR
+    '403':
+      $ref: '../components/responses/Forbidden.yaml'
+    '404':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            example: {  }
+            properties: {  }
+  tags:
+    - 'Withdraw Accounts'
+put:
+  summary: 'Update a withdraw account.'
+  operationId: updateAWithdrawAccount
+  description: 'Modify a withdraw account owned by the authenticated user.'
+  parameters: []
+  responses:
+    '200':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              data:
+                id: 15
+                name: 'Bank BCA'
+                account_number: '1234567890'
+                withdraw_method:
+                  id: 3
+                  name: 'Bank Transfer'
+                  currency: IDR
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 15
+                  name:
+                    type: string
+                    example: 'Bank BCA'
+                  account_number:
+                    type: string
+                    example: '1234567890'
+                  withdraw_method:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      name:
+                        type: string
+                        example: 'Bank Transfer'
+                      currency:
+                        type: string
+                        example: IDR
+    '403':
+      $ref: '../components/responses/Forbidden.yaml'
+    '422':
+      $ref: '../components/responses/ValidationError.yaml'
+    '500':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              message: 'Gateway error'
+              error: 'Gateway error'
+            properties:
+              message:
+                type: string
+                example: 'Gateway error'
+              error:
+                type: string
+                example: 'Gateway error'
+  tags:
+    - 'Withdraw Accounts'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            method_id:
+              type: integer
+              description: 'Identifier of the payout method returned by `lists`.'
+              example: 1
+            bank_code:
+              type: string
+              description: 'Bank or wallet code as supplied by the gateway.'
+              example: '014'
+            category:
+              type: string
+              description: 'Must be one of `Customer` or `Reconcile`.'
+              example: Customer
+            account_number:
+              type: string
+              description: 'Destination account or wallet number.'
+              example: '1234567890'
+            account_holder_name:
+              type: string
+              description: 'Account holder full name.'
+              example: 'Budi Santoso'
+            branch_name:
+              type: string
+              description: 'Branch name registered for the account.'
+              example: 'KC Jakarta'
+              nullable: true
+            country:
+              type: string
+              description: 'Country ISO name.'
+              example: Indonesia
+              nullable: true
+            account_type:
+              type: string
+              description: 'Account type or currency indicator provided by the gateway.'
+              example: Saving
+              nullable: true
+            additional_info:
+              type: string
+              description: 'Additional metadata to pass to the gateway.'
+              example: '{"bankCity":"Jakarta"}'
+              nullable: true
+          required:
+            - method_id
+            - bank_code
+            - category
+            - account_number
+            - account_holder_name
+delete:
+  summary: 'Delete a withdraw account.'
+  operationId: deleteAWithdrawAccount
+  description: 'Remove a withdraw account owned by the authenticated user.'
+  parameters: []
+  responses:
+    '200':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              message: 'Withdraw account deleted successfully'
+            properties:
+              message:
+                type: string
+                example: 'Withdraw account deleted successfully'
+    '403':
+      $ref: '../components/responses/Forbidden.yaml'
+    '404':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              message: 'Withdraw account not found'
+              error: 'Withdraw account not found'
+            properties:
+              message:
+                type: string
+                example: 'Withdraw account not found'
+              error:
+                type: string
+                example: 'Withdraw account not found'
+  tags:
+    - 'Withdraw Accounts'
+parameters:
+  -
+    in: path
+    name: id
+    description: 'Withdraw account ID.'
+    example: 15
+    required: true
+    schema:
+      type: integer

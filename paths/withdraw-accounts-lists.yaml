@@ -1,0 +1,72 @@
+get:
+  summary: 'Fetch payout bank and wallet catalog.'
+  operationId: fetchPayoutBankAndWalletCatalog
+  description: 'Retrieve the list of supported banks and wallets from the Easylink gateway.'
+  parameters: []
+  responses:
+    '200':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              data:
+                banks:
+                  -
+                    bank_id: '014'
+                    bank_name: BCA
+                wallets:
+                  -
+                    wallet_id: GOPAY
+                    wallet_name: GoPay
+            properties:
+              data:
+                type: object
+                properties:
+                  banks:
+                    type: array
+                    example:
+                      -
+                        bank_id: '014'
+                        bank_name: BCA
+                    items:
+                      type: object
+                      properties:
+                        bank_id:
+                          type: string
+                          example: '014'
+                        bank_name:
+                          type: string
+                          example: BCA
+                  wallets:
+                    type: array
+                    example:
+                      -
+                        wallet_id: GOPAY
+                        wallet_name: GoPay
+                    items:
+                      type: object
+                      properties:
+                        wallet_id:
+                          type: string
+                          example: GOPAY
+                        wallet_name:
+                          type: string
+                          example: GoPay
+    '500':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              message: 'Upstream gateway unavailable'
+            properties:
+              message:
+                type: string
+                example: 'Upstream gateway unavailable'
+    '403':
+      $ref: '../components/responses/Forbidden.yaml'
+  tags:
+    - 'Withdraw Accounts'

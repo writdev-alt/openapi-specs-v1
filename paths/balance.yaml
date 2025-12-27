@@ -1,0 +1,15 @@
+get:
+  summary: 'Get wallet balance'
+  operationId: getWalletBalance
+  description: "Retrieves the balance information for the authenticated user's wallet.\nReturns the balance details including available balance, hold balance, and currency details."
+  parameters: []
+  responses:
+    '401':
+      $ref: '../components/responses/Unauthorized.yaml'
+    '403':
+      $ref: '../components/responses/Forbidden.yaml'
+  tags:
+    - Wallets
+  security:
+    - ApiKeyAuth: []
+      MerchantKeyAuth: []

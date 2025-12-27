@@ -1,0 +1,15 @@
+description: 'Internal server error'
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        code:
+          type: string
+          example: '5000206'
+        message:
+          type: string
+          example: 'Create QRIS Payment processing failed. Please try again.'

@@ -1,0 +1,24 @@
+get:
+  summary: 'Get wallet details'
+  operationId: getWalletDetails
+  description: "Retrieves detailed information about a specific wallet belonging to the authenticated user.\nReturns wallet information including balance, available balance, hold balance, and currency details."
+  parameters: []
+  responses:
+    '401':
+      $ref: '../components/responses/Unauthorized.yaml'
+    '403':
+      $ref: '../components/responses/Forbidden.yaml'
+  tags:
+    - Wallets
+  security:
+    - ApiKeyAuth: []
+      MerchantKeyAuth: []
+parameters:
+  -
+    in: path
+    name: uuid
+    description: ''
+    example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+    required: true
+    schema:
+      type: string

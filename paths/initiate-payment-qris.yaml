@@ -1,0 +1,91 @@
+post:
+  summary: 'Process Create QRIS Payment request.'
+  operationId: processCreateQRISPaymentRequest
+  description: 'This method is the entry point for creating QRIS transactions.'
+  parameters: []
+  responses:
+    '200':
+      description: 'Payment initiated successfully'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              trxId:
+                type: string
+                example: 'TRX-20241022-0001'
+              refTrx:
+                type: string
+                example: 'INV-123456'
+              qrisPayload:
+                type: string
+                example: '000201010212...'
+              expiredAt:
+                type: string
+                format: date-time
+                example: '2024-10-22T10:15:00+07:00'
+              feeAmount:
+                type: number
+                example: 0
+    '403':
+      $ref: '../components/responses/Forbidden.yaml'
+    '422':
+      $ref: '../components/responses/ValidationError.yaml'
+    '500':
+      $ref: '../components/responses/InternalServerError.yaml'
+    '503':
+      $ref: '../components/responses/ServiceUnavailable.yaml'
+  tags:
+    - Payments
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            ref_trx:
+              type: string
+              description: ''
+              example: architecto
+            currency_code:
+              type: string
+              description: ''
+              example: IDR
+              enum:
+                - USD
+                - IDR
+            amount:
+              type: number
+              description: 'Must be at least 1.'
+              example: 22
+            expiration_time:
+              type: integer
+              description: 'Must be at least 30. Must not be greater than 1440.'
+              example: 7
+            note:
+              type: string
+              description: 'Must not be greater than 255 characters.'
+              example: z
+              nullable: true
+            description:
+              type: string
+              description: 'Must not be greater than 255 characters.'
+              example: 'Velit et fugiat sunt nihil accusantium.'
+              nullable: true
+            customer_name:
+              type: string
+              description: ''
+              example: architecto
+              nullable: true
+            customer_phone:
+              type: string
+              description: ''
+              example: architecto
+              nullable: true
+          required:
+            - currency_code
+            - amount
+  security:
+    - ApiKeyAuth: []
+      MerchantKeyAuth: []

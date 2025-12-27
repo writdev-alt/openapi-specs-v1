@@ -1,0 +1,15 @@
+description: ''
+content:
+  application/json:
+    schema:
+      type: object
+      example:
+        error: Unauthorized
+        message: 'Invalid API credentials'
+      properties:
+        error:
+          type: string
+          example: Unauthorized
+        message:
+          type: string
+          example: 'Invalid API credentials'

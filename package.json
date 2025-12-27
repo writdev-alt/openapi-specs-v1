@@ -1,0 +1,16 @@
+{
+  "name": "openapi-specs-v1",
+  "version": "1.0.0",
+  "description": "WRPay API OpenAPI Specification",
+  "scripts": {
+    "bundle": "redocly bundle openapi.yaml -o bundled.yaml",
+    "lint": "redocly lint openapi.yaml",
+    "preview": "redocly preview --port 9000",
+    "build": "npm run bundle && npm run build:html",
+    "build:html": "redocly build-docs openapi.yaml --output dist/index.html"
+  },
+  "devDependencies": {
+    "@redocly/cli": "^2.12.0",
+    "js-yaml": "^4.1.1"
+  }
+}

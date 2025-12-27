@@ -1,0 +1,79 @@
+get:
+  summary: 'Inspect withdraw account limits.'
+  operationId: inspectWithdrawAccountLimits
+  description: 'Retrieve withdraw method configuration such as min/max limits and charges.'
+  parameters: []
+  responses:
+    '200':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              message: 'Account information retrieved successfully'
+              data:
+                min_limit: 50000
+                max_limit: 50000000
+                charge: 5000
+                charge_type: fixed
+                currency: IDR
+                processing_time: H+1
+                conversion_rate: 1
+            properties:
+              message:
+                type: string
+                example: 'Account information retrieved successfully'
+              data:
+                type: object
+                properties:
+                  min_limit:
+                    type: integer
+                    example: 50000
+                  max_limit:
+                    type: integer
+                    example: 50000000
+                  charge:
+                    type: integer
+                    example: 5000
+                  charge_type:
+                    type: string
+                    example: fixed
+                  currency:
+                    type: string
+                    example: IDR
+                  processing_time:
+                    type: string
+                    example: H+1
+                  conversion_rate:
+                    type: integer
+                    example: 1
+    '500':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              message: 'Withdraw account not found'
+              error: 'Withdraw account not found'
+            properties:
+              message:
+                type: string
+                example: 'Withdraw account not found'
+              error:
+                type: string
+                example: 'Withdraw account not found'
+    '403':
+      $ref: '../components/responses/Forbidden.yaml'
+  tags:
+    - 'Withdraw Accounts'
+parameters:
+  -
+    in: path
+    name: id
+    description: 'Withdraw account ID.'
+    example: 15
+    required: true
+    schema:
+      type: integer

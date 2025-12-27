@@ -1,0 +1,59 @@
+post:
+  summary: 'Rejects (cancels) a withdrawal request.'
+  operationId: rejectscancelsAWithdrawalRequest
+  description: "This method allows an authorized party (e.g., admin or system) to cancel a pending\nwithdrawal. It updates the transaction status and logs the action."
+  parameters: []
+  responses:
+    '200':
+      description: 'Withdrawal rejected successfully'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: true
+              code:
+                type: string
+                example: '2000301'
+              message:
+                type: string
+                example: 'Withdrawal has been rejected.'
+              data:
+                type: object
+                properties:
+                  trx_id:
+                    type: string
+                    example: 'WD-20241022-0001'
+                  note:
+                    type: string
+                    nullable: true
+                    example: 'Duplicate request'
+    '403':
+      $ref: '../components/responses/Forbidden.yaml'
+    '422':
+      $ref: '../components/responses/ValidationError.yaml'
+  tags:
+    - Withdrawals
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            trx_id:
+              type: string
+              description: ''
+              example: architecto
+            note:
+              type: string
+              description: ''
+              example: architecto
+              nullable: true
+          required:
+            - trx_id
+  security:
+    - ApiKeyAuth: []
+      MerchantKeyAuth: []

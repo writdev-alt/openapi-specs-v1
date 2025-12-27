@@ -1,0 +1,19 @@
+description: 'Access denied - IP not in whitelist'
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: 'Access denied.'
+        error:
+          type: string
+          example: 'Unauthorized access'
+      example:
+        success: false
+        message: 'Access denied.'
+        error: 'Unauthorized access'

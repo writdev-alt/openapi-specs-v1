@@ -1,0 +1,62 @@
+openapi: 3.0.3
+info:
+  title: 'WRPay - Secure Payments & Advanced Merchant Gateway API Documentation'
+  description: 'Comprehensive API documentation for WRPay - Secure Payments & Advanced Merchant Gateway, including payment processing, wallet management, and transaction operations.'
+  version: 1.0.0
+servers:
+  -
+    url: 'https://production.ilonapy.com'
+    description: Production server
+  -
+    url: 'https://sandbox.ilonapay.com'
+    description: Sandbox server for testing
+tags:
+  -
+    name: Payments
+    description: 'Payment processing operations including QRIS payment initiation'
+  -
+    name: Wallets
+    description: 'Wallet management operations including balance and wallet details'
+  -
+    name: Transactions
+    description: 'Transaction status checking and monitoring'
+  -
+    name: Withdrawals
+    description: 'Withdrawal operations including creating and rejecting withdrawals'
+  -
+    name: 'Withdraw Accounts'
+    description: 'Withdraw account management including methods, lists, and account operations'
+paths:
+  /api/v1/initiate-payment-qris:
+    $ref: './paths/initiate-payment-qris.yaml'
+  /api/v1/wallets:
+    $ref: './paths/wallets.yaml'
+  '/api/v1/wallets/{uuid}':
+    $ref: './paths/wallet-details.yaml'
+  /api/v1/withdraw/reject:
+    $ref: './paths/withdraw-reject.yaml'
+  /api/v1/withdraw:
+    $ref: './paths/withdraw.yaml'
+  '/api/v1/check-status/{trxId}':
+    $ref: './paths/check-status.yaml'
+  /api/v1/balance:
+    $ref: './paths/balance.yaml'
+  /api/v1/withdraw-accounts/methods:
+    $ref: './paths/withdraw-accounts-methods.yaml'
+  /api/v1/withdraw-accounts/lists:
+    $ref: './paths/withdraw-accounts-lists.yaml'
+  '/api/v1/withdraw-accounts/{id}/info':
+    $ref: './paths/withdraw-accounts-info.yaml'
+  /api/v1/withdraw-accounts:
+    $ref: './paths/withdraw-accounts.yaml'
+  '/api/v1/withdraw-accounts/{id}':
+    $ref: './paths/withdraw-account-details.yaml'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      $ref: './components/securitySchemes/ApiKeyAuth.yaml'
+    MerchantKeyAuth:
+      $ref: './components/securitySchemes/MerchantKeyAuth.yaml'
+security:
+  - ApiKeyAuth: []
+    MerchantKeyAuth: []

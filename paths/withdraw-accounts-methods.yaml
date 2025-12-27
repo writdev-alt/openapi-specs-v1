@@ -1,0 +1,42 @@
+get:
+  summary: 'List withdraw methods.'
+  operationId: listWithdrawMethods
+  description: 'Retrieve all active withdrawal methods supported by the system.'
+  parameters: []
+  responses:
+    '200':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              data:
+                -
+                  id: 1
+                  name: 'Bank Transfer'
+                  currency: IDR
+            properties:
+              data:
+                type: array
+                example:
+                  -
+                    id: 1
+                    name: 'Bank Transfer'
+                    currency: IDR
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: 'Bank Transfer'
+                    currency:
+                      type: string
+                      example: IDR
+    '403':
+      $ref: '../components/responses/Forbidden.yaml'
+  tags:
+    - 'Withdraw Accounts'
