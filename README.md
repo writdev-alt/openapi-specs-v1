@@ -67,3 +67,33 @@ npm run preview
 
 This starts a local preview server on port 9000 using Redocly preview.
 
+## GitHub Pages Deployment
+
+This repository is configured to automatically deploy the documentation to GitHub Pages.
+
+### Setup Instructions
+
+1. **Enable GitHub Pages** in your repository settings:
+   - Go to Settings → Pages
+   - Under "Source", select "GitHub Actions"
+
+2. **Push to main branch**:
+   - The workflow will automatically build and deploy when you push to `main` branch
+   - You can also manually trigger the deployment from the Actions tab
+
+3. **Access your documentation**:
+   - After deployment, your documentation will be available at:
+   - `https://github.com/writdev-alt/openapi-specs-v1`
+
+### Manual Deployment
+
+You can also manually trigger the deployment:
+- Go to the Actions tab in your repository
+- Select "Deploy to GitHub Pages" workflow
+- Click "Run workflow"
+
+The workflow will:
+1. Build the OpenAPI specification
+2. Generate static HTML documentation using Redoc
+3. Deploy to GitHub Pages
+
