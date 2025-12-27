@@ -11,22 +11,66 @@ post:
           schema:
             type: object
             properties:
+              nmid:
+                type: string
+                example: 'ID2024000000248'
               trxId:
                 type: string
-                example: 'TRX-20241022-0001'
-              refTrx:
+                example: 'TRX-2025.10.20-XNDRRW1MET'
+              status:
+                type: boolean
+                example: true
+              qrImage:
                 type: string
-                example: 'INV-123456'
-              qrisPayload:
-                type: string
-                example: '000201010212...'
-              expiredAt:
+                description: 'Base64 encoded QR code image'
+                example: 'data:image/png;base64,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'
+              createdTs:
                 type: string
                 format: date-time
-                example: '2024-10-22T10:15:00+07:00'
+                example: '2025-10-20T16:57:10.444+07:00'
+              expiredTs:
+                type: string
+                format: date-time
+                example: '2025-10-20T17:57:10.309+07:00'
               feeAmount:
                 type: number
-                example: 0
+                example: 70
+              invoiceId:
+                type: string
+                example: 'NETZ-INV-M_JH8gxUJR17609542303095Up'
+              qrContent:
+                type: string
+                description: 'QRIS payment string content'
+                example: '00020101021226650013ID.NETZME.WWW01189360081401001083820215ID20240000002480303UKE51440014ID.CO.QRIS.WWW0215ID20240000002480303UKE5204413153033605405100005802ID5903RPD6008SIMEULUE61052389562690703A010812qris_invoice99420002000132377c254d3d0f4fbe8edce9b7d3d7a55a63047DD5'
+              statistic:
+                type: array
+                items:
+                  type: object
+                example: []
+              terminalId:
+                type: string
+                example: 'A01'
+              totalAmount:
+                type: number
+                example: 10000
+              merchantLocation:
+                type: string
+                example: 'SIMEULUE'
+              retailOutletData:
+                type: object
+                nullable: true
+                example: null
+              virtualAccountData:
+                type: array
+                items:
+                  type: object
+                example: []
+              netzmeSeamlessToken:
+                type: string
+                example: ''
+              refTrx:
+                type: string
+                example: 'cf923462-d1be-4cc5-a96f-994d2ccc7bad'
     '403':
       $ref: '../components/responses/Forbidden.yaml'
     '422':
